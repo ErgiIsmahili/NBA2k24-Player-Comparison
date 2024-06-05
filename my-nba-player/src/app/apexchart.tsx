@@ -74,9 +74,9 @@ class ApexChart extends React.Component<ApexChartProps, ApexChartState> {
           radar: {
             size: 140,
             polygons: {
-              strokeColors: '#e9e9e9',
+              strokeColors: '#000',
               fill: {
-                colors: ['#f8f8f8', '#fff'],
+                colors: ['#f8f8f8'],
               },
             },
           },
@@ -84,11 +84,11 @@ class ApexChart extends React.Component<ApexChartProps, ApexChartState> {
         title: {
           text: 'Radar with Polygon Fill',
         },
-        colors: ['#FF4560'],
+        colors: ['#000'],
         markers: {
           size: 4,
-          colors: ['#fff'],
-          strokeColor: '#FF4560',
+          colors: ['#000'],
+          strokeColor: '#000',
           strokeWidth: 2,
         },
         tooltip: {
@@ -100,12 +100,12 @@ class ApexChart extends React.Component<ApexChartProps, ApexChartState> {
           categories: props.categories,
         },
         yaxis: {
-          min: 0,
-          max: 10,
-          labels: {
-            formatter: (val: number, i: number) => (i % 2 === 0 ? val.toString() : ''),
+            min: 0,
+            max: 10,
+            labels: {
+                formatter: (val: number, i: number) => '',
+            },
           },
-        },
       },
     };
   }

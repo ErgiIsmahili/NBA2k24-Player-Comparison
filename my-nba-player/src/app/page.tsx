@@ -81,51 +81,51 @@ const IndexPage: React.FC = () => {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <div style={{ marginRight: '20px' }}>
             <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Outside Scoring</h3>
-            {renderAttributeInputs('closeShot', customPlayer.closeShot ? customPlayer.closeShot : 5)}
-            {renderAttributeInputs('midRangeShot', customPlayer.midRangeShot ? customPlayer.midRangeShot : 5)}
-            {renderAttributeInputs('threePointShot', customPlayer.threePointShot ? customPlayer.threePointShot : 5)}
-            {renderAttributeInputs('freeThrow', customPlayer.freeThrow ? customPlayer.freeThrow : 5)}
-            {renderAttributeInputs('shotIQ', customPlayer.shotIQ ? customPlayer.shotIQ : 5)}
+            {renderAttributeInputs('Close Shot', customPlayer.closeShot ? customPlayer.closeShot : 5)}
+            {renderAttributeInputs('Mid Range', customPlayer.midRangeShot ? customPlayer.midRangeShot : 5)}
+            {renderAttributeInputs('Three Pointer', customPlayer.threePointShot ? customPlayer.threePointShot : 5)}
+            {renderAttributeInputs('Free Throw', customPlayer.freeThrow ? customPlayer.freeThrow : 5)}
+            {renderAttributeInputs('Shot IQ', customPlayer.shotIQ ? customPlayer.shotIQ : 5)}
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <div style={{ marginRight: '20px' }}>
             <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Inside Scoring</h3>
-            {renderAttributeInputs('layup', customPlayer.layup ? customPlayer.layup : 5)}
-            {renderAttributeInputs('postHook', customPlayer.postHook ? customPlayer.postHook : 5)}
-            {renderAttributeInputs('postFade', customPlayer.postFade ? customPlayer.postFade : 5)}
-            {renderAttributeInputs('postControl', customPlayer.postControl ? customPlayer.postControl : 5)}
+            {renderAttributeInputs('Layup', customPlayer.layup ? customPlayer.layup : 5)}
+            {renderAttributeInputs('Hook Shot', customPlayer.postHook ? customPlayer.postHook : 5)}
+            {renderAttributeInputs('Post Fade', customPlayer.postFade ? customPlayer.postFade : 5)}
+            {renderAttributeInputs('Post Control', customPlayer.postControl ? customPlayer.postControl : 5)}
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <div style={{ marginRight: '20px' }}>
             <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Playmaking</h3>
-            {renderAttributeInputs('passAccuracy', customPlayer.passAccuracy ? customPlayer.passAccuracy : 5)}
-            {renderAttributeInputs('ballHandle', customPlayer.ballHandle ? customPlayer.ballHandle : 5)}
-            {renderAttributeInputs('passIQ', customPlayer.passIQ ? customPlayer.passIQ : 5)}
+            {renderAttributeInputs('Pass Accuracy', customPlayer.passAccuracy ? customPlayer.passAccuracy : 5)}
+            {renderAttributeInputs('Ball Handling', customPlayer.ballHandle ? customPlayer.ballHandle : 5)}
+            {renderAttributeInputs('Passing IQ', customPlayer.passIQ ? customPlayer.passIQ : 5)}
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <div style={{ marginRight: '20px' }}>
             <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Athleticism</h3>
-            {renderAttributeInputs('speed', customPlayer.speed ? customPlayer.speed : 5)}
-            {renderAttributeInputs('strength', customPlayer.strength ? customPlayer.strength : 5)}
-            {renderAttributeInputs('hustle', customPlayer.hustle ? customPlayer.hustle : 5)}
+            {renderAttributeInputs('Speed', customPlayer.speed ? customPlayer.speed : 5)}
+            {renderAttributeInputs('Strength', customPlayer.strength ? customPlayer.strength : 5)}
+            {renderAttributeInputs('Hustle', customPlayer.hustle ? customPlayer.hustle : 5)}
           </div>
         </div>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
         <div style={{ marginRight: '20px' }}>
           <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Rebounding</h3>
-          {renderAttributeInputs('offensiveRebound', customPlayer.offensiveRebound ? customPlayer.offensiveRebound : 5)}
-          {renderAttributeInputs('defensiveRebound', customPlayer.defensiveRebound ? customPlayer.defensiveRebound : 5)}
+          {renderAttributeInputs('Offensive Rebound', customPlayer.offensiveRebound ? customPlayer.offensiveRebound : 5)}
+          {renderAttributeInputs('Defensive Rebound', customPlayer.defensiveRebound ? customPlayer.defensiveRebound : 5)}
         </div>
         <div style={{ marginRight: '20px' }}>
           <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Defense</h3>
-          {renderAttributeInputs('interiorDefense', customPlayer.interiorDefense ? customPlayer.interiorDefense : 5)}
-          {renderAttributeInputs('perimeterDefense', customPlayer.perimeterDefense ? customPlayer.perimeterDefense : 5)}
-          {renderAttributeInputs('steal', customPlayer.steal ? customPlayer.steal : 5)}
-          {renderAttributeInputs('block', customPlayer.block ? customPlayer.block : 5)}
-          {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ ? customPlayer.helpDefenseIQ : 5)}
+          {renderAttributeInputs('Interoir Defense', customPlayer.interiorDefense ? customPlayer.interiorDefense : 5)}
+          {renderAttributeInputs('Perimeter Defense', customPlayer.perimeterDefense ? customPlayer.perimeterDefense : 5)}
+          {renderAttributeInputs('Steal', customPlayer.steal ? customPlayer.steal : 5)}
+          {renderAttributeInputs('Block', customPlayer.block ? customPlayer.block : 5)}
+          {renderAttributeInputs('Help Defense', customPlayer.helpDefenseIQ ? customPlayer.helpDefenseIQ : 5)}
         </div>
         </div>
         </div>
