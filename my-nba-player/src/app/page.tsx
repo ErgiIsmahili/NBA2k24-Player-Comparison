@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { PlayerAttributes, findMostSimilarPlayer, calculateEuclideanDistance } from './yourPlayer';
 import league from './league.json';
+import ApexChart from './apexchart';
 
 const IndexPage: React.FC = () => {
   const [mostSimilarPlayer, setMostSimilarPlayer] = useState<{ player: PlayerAttributes | null, distance: number | null }>({ player: null, distance: null });
