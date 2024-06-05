@@ -127,16 +127,34 @@ const IndexPage: React.FC = () => {
           {renderAttributeInputs('block', customPlayer.block ? customPlayer.block : 5)}
           {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ ? customPlayer.helpDefenseIQ : 5)}
         </div>
-      </div>
-      </div>
-      {mostSimilarPlayer.player && (
-        <div>
-          <h1 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Most Similar Player:</h1>
-          <p>Name: {mostSimilarPlayer.player.name}</p>
-          <p>Distance: {mostSimilarPlayer.distance}</p>
         </div>
-      )}
-    </div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', margin: '20px' }}>
+          <div style={{ marginRight: '10px', width: '480px' }}>
+            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Custom Player Chart</h3>
+            <ApexChart 
+              series={[{ name: 'Your Chart', data: [6, 5, 5, 5, 5, 5, 6] }]}
+              categories= {['Overall', 'Inside Scoring', 'Outside Scoring', 'Atleticism', 'Playmaking', 'Rebounding', 'Defense']}
+            />
+          </div>
+          <div style={{ marginRight: '10px', marginBottom: '315px', border: '3px solid #ccc', padding: '10px', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Most Similar Player</h3>
+            {mostSimilarPlayer.player && (
+              <div>
+                <h4>{mostSimilarPlayer.player.name}</h4>
+                <p>Distance: {mostSimilarPlayer.distance}</p>
+              </div>
+            )}
+            </div>
+          <div style={{ marginRight: '10px', width: '480px' }}>
+            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Most Similar Player Chart</h3>
+            <ApexChart 
+              series={[{ name: 'Player Chart', data: [5, 9, 5, 5, 5, 7, 8] }]}
+              categories= {['Overall', 'Inside Scoring', 'Outside Scoring', 'Atleticism', 'Playmaking', 'Rebounding', 'Defense']}
+            />
+          </div>
+        </div>
+      </div>
   );  
 };  
 
