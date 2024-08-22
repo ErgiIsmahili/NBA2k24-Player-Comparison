@@ -69,6 +69,54 @@ export function findMostSimilarPlayer(customPlayer: PlayerAttributes, league: Pl
     return { player: mostSimilarPlayer!, distance: smallestDistance };
 }
 
+interface AverageStats {
+    outsideScoring: number;
+    insideScoring: number;
+    playmaking: number;
+    athleticism: number;
+    rebounding: number;
+    defense: number;
+  }
+  
+export function calculateAverageStats(player: PlayerAttributes): AverageStats {
+    return {
+        outsideScoring: Math.round(
+        ((player.closeShot ?? 0) +
+            (player.midRangeShot ?? 0) +
+            (player.threePointShot ?? 0) +
+            (player.freeThrow ?? 0) +
+            (player.shotIQ ?? 0)) / 5
+        ),
+        insideScoring: Math.round(
+        ((player.layup ?? 0) +
+            (player.postHook ?? 0) +
+            (player.postFade ?? 0) +
+            (player.postControl ?? 0)) / 4
+        ),
+        playmaking: Math.round(
+        ((player.passAccuracy ?? 0) +
+            (player.ballHandle ?? 0) +
+            (player.passIQ ?? 0)) / 3
+        ),
+        athleticism: Math.round(
+        ((player.speed ?? 0) +
+            (player.strength ?? 0) +
+            (player.hustle ?? 0)) / 3
+        ),
+        rebounding: Math.round(
+        ((player.offensiveRebound ?? 0) +
+            (player.defensiveRebound ?? 0)) / 2
+        ),
+        defense: Math.round(
+        ((player.interiorDefense ?? 0) +
+            (player.perimeterDefense ?? 0) +
+            (player.steal ?? 0) +
+            (player.block ?? 0) +
+            (player.helpDefenseIQ ?? 0)) / 5
+        ),
+    };
+}
+
 const league: PlayerAttributes[] = leagueData;
 
 const customPlayer: PlayerAttributes = {
@@ -96,6 +144,3 @@ const customPlayer: PlayerAttributes = {
     offensiveRebound: 90,
     defensiveRebound: 90
 };
-
-const { player, distance } = findMostSimilarPlayer(customPlayer, league);
-console.log(player.name, distance);

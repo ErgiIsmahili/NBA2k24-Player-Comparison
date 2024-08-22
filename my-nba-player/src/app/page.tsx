@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import useDebounce from './useDebounce';
-import { PlayerAttributes, findMostSimilarPlayer } from './yourPlayer';
+import { PlayerAttributes, findMostSimilarPlayer, calculateAverageStats } from './yourPlayer';
 import league from './league.json';
 import ApexChart from './apexchart';
 
@@ -55,7 +55,9 @@ const IndexPage: React.FC = () => {
     }
   };
 
-  const renderAttributeInputs = (stat: string, value: number) => {
+  const renderAttributeInputs = (stat: string, value: number | undefined) => {
+    const sliderValue = value ?? 50; // Use the value if defined, otherwise fallback to 50
+  
     return (
       <div className="mb-4">
         <h2 className="text-sm font-medium mb-1">{stat}</h2>
@@ -64,18 +66,28 @@ const IndexPage: React.FC = () => {
             type="range"
             min="0"
             max="100"
-            value={value}
+            value={sliderValue}
             onChange={(e) =>
               handleCustomPlayerChange(stat as keyof PlayerAttributes, parseInt(e.target.value))
             }
             className="flex-grow"
           />
-          <span className="w-12 text-center">{value}</span>
+          <span className="w-12 text-center">{sliderValue}</span>
         </div>
       </div>
     );
   };
-  
+
+  const customPlayerAverages = calculateAverageStats(customPlayer);
+  const mostSimilarPlayerAverages = mostSimilarPlayer.player ? calculateAverageStats(mostSimilarPlayer.player) : {
+    outsideScoring: 50,
+    insideScoring: 50,
+    playmaking: 50,
+    athleticism: 50,
+    rebounding: 50,
+    defense: 50,
+  };
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl underline">NBA 2k24 Player Comparison</h1>
@@ -91,51 +103,51 @@ const IndexPage: React.FC = () => {
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Outside Scoring</h3>
-            {renderAttributeInputs('closeShot', customPlayer.closeShot || 50)}
-            {renderAttributeInputs('midRangeShot', customPlayer.midRangeShot || 50)}
-            {renderAttributeInputs('threePointShot', customPlayer.threePointShot || 50)}
-            {renderAttributeInputs('freeThrow', customPlayer.freeThrow || 50)}
-            {renderAttributeInputs('shotIQ', customPlayer.shotIQ || 50)}
+            {renderAttributeInputs('closeShot', customPlayer.closeShot)}
+            {renderAttributeInputs('midRangeShot', customPlayer.midRangeShot)}
+            {renderAttributeInputs('threePointShot', customPlayer.threePointShot)}
+            {renderAttributeInputs('freeThrow', customPlayer.freeThrow)}
+            {renderAttributeInputs('shotIQ', customPlayer.shotIQ)}
           </div>
         </div>
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Inside Scoring</h3>
-            {renderAttributeInputs('layup', customPlayer.layup || 50)}
-            {renderAttributeInputs('postHook', customPlayer.postHook || 50)}
-            {renderAttributeInputs('postFade', customPlayer.postFade || 50)}
-            {renderAttributeInputs('postControl', customPlayer.postControl || 50)}
+            {renderAttributeInputs('layup', customPlayer.layup)}
+            {renderAttributeInputs('postHook', customPlayer.postHook)}
+            {renderAttributeInputs('postFade', customPlayer.postFade)}
+            {renderAttributeInputs('postControl', customPlayer.postControl)}
           </div>
         </div>
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Playmaking</h3>
-            {renderAttributeInputs('passAccuracy', customPlayer.passAccuracy || 50)}
-            {renderAttributeInputs('ballHandle', customPlayer.ballHandle || 50)}
-            {renderAttributeInputs('passIQ', customPlayer.passIQ || 50)}
+            {renderAttributeInputs('passAccuracy', customPlayer.passAccuracy)}
+            {renderAttributeInputs('ballHandle', customPlayer.ballHandle)}
+            {renderAttributeInputs('passIQ', customPlayer.passIQ)}
           </div>
         </div>
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Athleticism</h3>
-            {renderAttributeInputs('speed', customPlayer.speed || 50)}
-            {renderAttributeInputs('strength', customPlayer.strength || 50)}
-            {renderAttributeInputs('hustle', customPlayer.hustle || 50)}
+            {renderAttributeInputs('speed', customPlayer.speed)}
+            {renderAttributeInputs('strength', customPlayer.strength)}
+            {renderAttributeInputs('hustle', customPlayer.hustle)}
           </div>
         </div>
         <div className="flex flex-row items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Rebounding</h3>
-            {renderAttributeInputs('offensiveRebound', customPlayer.offensiveRebound || 50)}
-            {renderAttributeInputs('defensiveRebound', customPlayer.defensiveRebound || 50)}
+            {renderAttributeInputs('offensiveRebound', customPlayer.offensiveRebound)}
+            {renderAttributeInputs('defensiveRebound', customPlayer.defensiveRebound)}
           </div>
           <div className="mr-5">
             <h3 className="text-lg underline">Defense</h3>
-            {renderAttributeInputs('interiorDefense', customPlayer.interiorDefense || 50)}
-            {renderAttributeInputs('perimeterDefense', customPlayer.perimeterDefense || 50)}
-            {renderAttributeInputs('steal', customPlayer.steal || 50)}
-            {renderAttributeInputs('block', customPlayer.block || 50)}
-            {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ || 50)}
+            {renderAttributeInputs('interiorDefense', customPlayer.interiorDefense)}
+            {renderAttributeInputs('perimeterDefense', customPlayer.perimeterDefense)}
+            {renderAttributeInputs('steal', customPlayer.steal)}
+            {renderAttributeInputs('block', customPlayer.block)}
+            {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ)}
           </div>
         </div>
       </div>
@@ -143,8 +155,15 @@ const IndexPage: React.FC = () => {
         <div className="mr-2.5 w-96">
           <h3 className="text-lg underline">Custom Player Chart</h3>
           <ApexChart
-            series={[{ name: 'Your Chart', data: [6, 50, 50, 50, 50, 50, 6] }]}
-            categories={['Overall', 'Inside Scoring', 'Outside Scoring', 'Athleticism', 'Playmaking', 'Rebounding', 'Defense']}
+            series={[{ name: 'Your Chart', data: [
+              customPlayerAverages.outsideScoring,
+              customPlayerAverages.insideScoring,
+              customPlayerAverages.playmaking,
+              customPlayerAverages.athleticism,
+              customPlayerAverages.rebounding,
+              customPlayerAverages.defense
+            ] }]}
+            categories={['Outside Scoring', 'Inside Scoring', 'Playmaking', 'Athleticism', 'Rebounding', 'Defense']}
           />
         </div>
         <div className="mr-2.5 mb-[315px] border-3 border-gray-300 p-2.5 rounded-lg">
@@ -158,13 +177,20 @@ const IndexPage: React.FC = () => {
         <div className="mr-2.5 w-96">
           <h3 className="text-lg underline">Most Similar Player Chart</h3>
           <ApexChart
-            series={[{ name: 'Player Chart', data: [50, 9, 50, 50, 50, 7, 8] }]}
-            categories={['Overall', 'Inside Scoring', 'Outside Scoring', 'Athleticism', 'Playmaking', 'Rebounding', 'Defense']}
+            series={[{ name: 'Player Chart', data: [
+              mostSimilarPlayerAverages.outsideScoring,
+              mostSimilarPlayerAverages.insideScoring,
+              mostSimilarPlayerAverages.playmaking,
+              mostSimilarPlayerAverages.athleticism,
+              mostSimilarPlayerAverages.rebounding,
+              mostSimilarPlayerAverages.defense
+            ] }]}
+            categories={['Outside Scoring', 'Inside Scoring', 'Playmaking', 'Athleticism', 'Rebounding', 'Defense']}
           />
         </div>
       </div>
     </div>
   );  
-};  
+};
 
 export default IndexPage;

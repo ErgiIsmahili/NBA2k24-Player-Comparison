@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactApexChart from 'react-apexcharts';
+import React, { Component } from 'react';
 
 interface ApexChartProps {
   series: {
@@ -55,9 +54,10 @@ interface ApexChartState {
       };
     };
   };
+  isClient: boolean;
 }
 
-class ApexChart extends React.Component<ApexChartProps, ApexChartState> {
+class ApexChart extends Component<ApexChartProps, ApexChartState> {
   constructor(props: ApexChartProps) {
     super(props);
 
@@ -103,18 +103,39 @@ class ApexChart extends React.Component<ApexChartProps, ApexChartState> {
           min: 0,
           max: 100,
           labels: {
-            formatter: (val: number, i: number) => (i % 2 === 0 ? val.toString() : ''),
+            formatter: (val: number, i: number) =>
+              i % 2 === 0 ? val.toString() : '',
           },
         },
       },
+      isClient: false, // Initially set to false (SSR mode)
     };
   }
 
+  componentDidMount() {
+    // Ensure this code runs only on the client-side
+    this.setState({ isClient: true });
+  }
+
   render() {
+    const { isClient } = this.state;
+
+    if (!isClient) {
+      // Prevent rendering on the server side
+      return null;
+    }
+
+    const ReactApexChart = require('react-apexcharts').default;
+
     return (
       <div>
         <div id="chart">
-          <ReactApexChart options={this.state.options} series={this.props.series} type="radar" height={350} />
+          <ReactApexChart
+            options={this.state.options}
+            series={this.props.series}
+            type="radar"
+            height={350}
+          />
         </div>
         <div id="html-dist"></div>
       </div>
