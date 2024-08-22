@@ -1,6 +1,8 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { PlayerAttributes, findMostSimilarPlayer, calculateEuclideanDistance } from './yourPlayer';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import useDebounce from './useDebounce';
+import { PlayerAttributes, findMostSimilarPlayer } from './yourPlayer';
 import league from './league.json';
 import ApexChart from './apexchart';
 
@@ -31,7 +33,7 @@ const IndexPage: React.FC = () => {
     defensiveRebound: 50,
   });
 
-  useEffect(() => {
+  const debouncedFetchLeagueData = useDebounce(() => {
     const fetchLeagueData = async () => {
       try {
         const { player, distance } = findMostSimilarPlayer(customPlayer, league);
@@ -41,35 +43,39 @@ const IndexPage: React.FC = () => {
       }
     };
     fetchLeagueData();
+  }, 300);
+
+  useEffect(() => {
+    debouncedFetchLeagueData();
   }, [customPlayer]);
 
   const handleCustomPlayerChange = (stat: keyof PlayerAttributes, value: number) => {
-    setCustomPlayer({ ...customPlayer, [stat]: value });
+    if (value >= 0 && value <= 100) {
+      setCustomPlayer((prev) => ({ ...prev, [stat]: value }));
+    }
   };
 
   const renderAttributeInputs = (stat: string, value: number) => {
-  return (
-    <div className="mb-4">
-      <h2 className="text-sm font-medium mb-1">{stat}</h2>
-      <div className="flex items-center space-x-2">
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={value}
-          onChange={(e) =>
-            handleCustomPlayerChange(stat as keyof PlayerAttributes, parseInt(e.target.value))
-          }
-          className="flex-grow"
-        />
-        <span className="w-12 text-center">{value}</span>
+    return (
+      <div className="mb-4">
+        <h2 className="text-sm font-medium mb-1">{stat}</h2>
+        <div className="flex items-center space-x-2">
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={value}
+            onChange={(e) =>
+              handleCustomPlayerChange(stat as keyof PlayerAttributes, parseInt(e.target.value))
+            }
+            className="flex-grow"
+          />
+          <span className="w-12 text-center">{value}</span>
+        </div>
       </div>
-    </div>
-  );
-};
-
+    );
+  };
   
-
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl underline">NBA 2k24 Player Comparison</h1>
