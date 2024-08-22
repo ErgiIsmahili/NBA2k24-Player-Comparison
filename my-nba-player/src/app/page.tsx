@@ -67,94 +67,93 @@ const IndexPage: React.FC = () => {
   
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h1 style={{ fontSize: '2rem', textDecoration: 'underline' }}>NBA 2k24 Player Comparison</h1>
+    <div className="flex flex-col items-center">
+      <h1 className="text-2xl underline">NBA 2k24 Player Comparison</h1>
       <div>
-        <h2 style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', marginBottom: '20px' }}>
-          Answer each of the following prompts by dragging the slider. 
-          Afterward, you can filter the list of current players by their 2K rating. 
-          You will be matched with a player whose rating is greater than or equal to the filter value. 
+        <h2 className="max-w-2xl mx-auto text-center mb-5">
+          Answer each of the following prompts by dragging the slider.
+          Afterward, you can filter the list of current players by their 2K rating.
+          You will be matched with a player whose rating is greater than or equal to the filter value.
           Once matched, you can view your own radar chart and the player. Enjoy!
         </h2>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ marginRight: '20px' }}>
-            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Outside Scoring</h3>
-            {renderAttributeInputs('closeShot', customPlayer.closeShot ? customPlayer.closeShot : 5)}
-            {renderAttributeInputs('midRangeShot', customPlayer.midRangeShot ? customPlayer.midRangeShot : 5)}
-            {renderAttributeInputs('threePointShot', customPlayer.threePointShot ? customPlayer.threePointShot : 5)}
-            {renderAttributeInputs('freeThrow', customPlayer.freeThrow ? customPlayer.freeThrow : 5)}
-            {renderAttributeInputs('shotIQ', customPlayer.shotIQ ? customPlayer.shotIQ : 5)}
+      <div className="flex flex-row justify-around max-w-5xl mx-auto">
+        <div className="flex flex-col items-start">
+          <div className="mr-5">
+            <h3 className="text-lg underline">Outside Scoring</h3>
+            {renderAttributeInputs('closeShot', customPlayer.closeShot || 5)}
+            {renderAttributeInputs('midRangeShot', customPlayer.midRangeShot || 5)}
+            {renderAttributeInputs('threePointShot', customPlayer.threePointShot || 5)}
+            {renderAttributeInputs('freeThrow', customPlayer.freeThrow || 5)}
+            {renderAttributeInputs('shotIQ', customPlayer.shotIQ || 5)}
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ marginRight: '20px' }}>
-            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Inside Scoring</h3>
-            {renderAttributeInputs('layup', customPlayer.layup ? customPlayer.layup : 5)}
-            {renderAttributeInputs('postHook', customPlayer.postHook ? customPlayer.postHook : 5)}
-            {renderAttributeInputs('postFade', customPlayer.postFade ? customPlayer.postFade : 5)}
-            {renderAttributeInputs('postControl', customPlayer.postControl ? customPlayer.postControl : 5)}
+        <div className="flex flex-col items-start">
+          <div className="mr-5">
+            <h3 className="text-lg underline">Inside Scoring</h3>
+            {renderAttributeInputs('layup', customPlayer.layup || 5)}
+            {renderAttributeInputs('postHook', customPlayer.postHook || 5)}
+            {renderAttributeInputs('postFade', customPlayer.postFade || 5)}
+            {renderAttributeInputs('postControl', customPlayer.postControl || 5)}
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ marginRight: '20px' }}>
-            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Playmaking</h3>
-            {renderAttributeInputs('passAccuracy', customPlayer.passAccuracy ? customPlayer.passAccuracy : 5)}
-            {renderAttributeInputs('ballHandle', customPlayer.ballHandle ? customPlayer.ballHandle : 5)}
-            {renderAttributeInputs('passIQ', customPlayer.passIQ ? customPlayer.passIQ : 5)}
+        <div className="flex flex-col items-start">
+          <div className="mr-5">
+            <h3 className="text-lg underline">Playmaking</h3>
+            {renderAttributeInputs('passAccuracy', customPlayer.passAccuracy || 5)}
+            {renderAttributeInputs('ballHandle', customPlayer.ballHandle || 5)}
+            {renderAttributeInputs('passIQ', customPlayer.passIQ || 5)}
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ marginRight: '20px' }}>
-            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Athleticism</h3>
-            {renderAttributeInputs('speed', customPlayer.speed ? customPlayer.speed : 5)}
-            {renderAttributeInputs('strength', customPlayer.strength ? customPlayer.strength : 5)}
-            {renderAttributeInputs('hustle', customPlayer.hustle ? customPlayer.hustle : 5)}
+        <div className="flex flex-col items-start">
+          <div className="mr-5">
+            <h3 className="text-lg underline">Athleticism</h3>
+            {renderAttributeInputs('speed', customPlayer.speed || 5)}
+            {renderAttributeInputs('strength', customPlayer.strength || 5)}
+            {renderAttributeInputs('hustle', customPlayer.hustle || 5)}
           </div>
         </div>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
-        <div style={{ marginRight: '20px' }}>
-          <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Rebounding</h3>
-          {renderAttributeInputs('offensiveRebound', customPlayer.offensiveRebound ? customPlayer.offensiveRebound : 5)}
-          {renderAttributeInputs('defensiveRebound', customPlayer.defensiveRebound ? customPlayer.defensiveRebound : 5)}
-        </div>
-        <div style={{ marginRight: '20px' }}>
-          <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Defense</h3>
-          {renderAttributeInputs('interiorDefense', customPlayer.interiorDefense ? customPlayer.interiorDefense : 5)}
-          {renderAttributeInputs('perimeterDefense', customPlayer.perimeterDefense ? customPlayer.perimeterDefense : 5)}
-          {renderAttributeInputs('steal', customPlayer.steal ? customPlayer.steal : 5)}
-          {renderAttributeInputs('block', customPlayer.block ? customPlayer.block : 5)}
-          {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ ? customPlayer.helpDefenseIQ : 5)}
-        </div>
-        </div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', margin: '20px' }}>
-          <div style={{ marginRight: '10px', width: '480px' }}>
-            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Custom Player Chart</h3>
-            <ApexChart 
-              series={[{ name: 'Your Chart', data: [6, 5, 5, 5, 5, 5, 6] }]}
-              categories= {['Overall', 'Inside Scoring', 'Outside Scoring', 'Atleticism', 'Playmaking', 'Rebounding', 'Defense']}
-            />
+        <div className="flex flex-row items-start">
+          <div className="mr-5">
+            <h3 className="text-lg underline">Rebounding</h3>
+            {renderAttributeInputs('offensiveRebound', customPlayer.offensiveRebound || 5)}
+            {renderAttributeInputs('defensiveRebound', customPlayer.defensiveRebound || 5)}
           </div>
-          <div style={{ marginRight: '10px', marginBottom: '315px', border: '3px solid #ccc', padding: '10px', borderRadius: '8px' }}>
-            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Most Similar Player</h3>
-            {mostSimilarPlayer.player && (
-              <div>
-                <h4>{mostSimilarPlayer.player.name}</h4>
-                <p>Distance: {mostSimilarPlayer.distance}</p>
-              </div>
-            )}
-            </div>
-          <div style={{ marginRight: '10px', width: '480px' }}>
-            <h3 style={{ fontSize: '1.2rem', textDecoration: 'underline' }}>Most Similar Player Chart</h3>
-            <ApexChart 
-              series={[{ name: 'Player Chart', data: [5, 9, 5, 5, 5, 7, 8] }]}
-              categories= {['Overall', 'Inside Scoring', 'Outside Scoring', 'Atleticism', 'Playmaking', 'Rebounding', 'Defense']}
-            />
+          <div className="mr-5">
+            <h3 className="text-lg underline">Defense</h3>
+            {renderAttributeInputs('interiorDefense', customPlayer.interiorDefense || 5)}
+            {renderAttributeInputs('perimeterDefense', customPlayer.perimeterDefense || 5)}
+            {renderAttributeInputs('steal', customPlayer.steal || 5)}
+            {renderAttributeInputs('block', customPlayer.block || 5)}
+            {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ || 5)}
           </div>
         </div>
       </div>
+      <div className="flex flex-row items-center justify-around my-5">
+        <div className="mr-2.5 w-96">
+          <h3 className="text-lg underline">Custom Player Chart</h3>
+          <ApexChart
+            series={[{ name: 'Your Chart', data: [6, 5, 5, 5, 5, 5, 6] }]}
+            categories={['Overall', 'Inside Scoring', 'Outside Scoring', 'Athleticism', 'Playmaking', 'Rebounding', 'Defense']}
+          />
+        </div>
+        <div className="mr-2.5 mb-[315px] border-3 border-gray-300 p-2.5 rounded-lg">
+          <h3 className="text-lg underline">Most Similar Player</h3>
+          {mostSimilarPlayer.player && (
+            <div>
+              <h4>{mostSimilarPlayer.player.name}</h4>
+            </div>
+          )}
+        </div>
+        <div className="mr-2.5 w-96">
+          <h3 className="text-lg underline">Most Similar Player Chart</h3>
+          <ApexChart
+            series={[{ name: 'Player Chart', data: [5, 9, 5, 5, 5, 7, 8] }]}
+            categories={['Overall', 'Inside Scoring', 'Outside Scoring', 'Athleticism', 'Playmaking', 'Rebounding', 'Defense']}
+          />
+        </div>
+      </div>
+    </div>
   );  
 };  
 
