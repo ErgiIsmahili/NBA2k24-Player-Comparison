@@ -101,7 +101,7 @@ class ApexChart extends React.Component<ApexChartProps, ApexChartState> {
         },
         yaxis: {
           min: 0,
-          max: 10,
+          max: 100,
           labels: {
             formatter: (val: number, i: number) => (i % 2 === 0 ? val.toString() : ''),
           },

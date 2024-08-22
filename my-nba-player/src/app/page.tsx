@@ -7,28 +7,28 @@ import ApexChart from './apexchart';
 const IndexPage: React.FC = () => {
   const [mostSimilarPlayer, setMostSimilarPlayer] = useState<{ player: PlayerAttributes | null, distance: number | null }>({ player: null, distance: null });
   const [customPlayer, setCustomPlayer] = useState<PlayerAttributes>({
-    closeShot: 5,
-    midRangeShot: 5,
-    threePointShot: 5,
-    freeThrow: 5,
-    shotIQ: 5,
-    layup: 5,
-    postHook: 5,
-    postFade: 5,
-    postControl: 5,
-    interiorDefense: 5,
-    perimeterDefense: 5,
-    steal: 5,
-    block: 5,
-    helpDefenseIQ: 5,
-    speed: 5,
-    strength: 5,
-    hustle: 5,
-    passAccuracy: 5,
-    ballHandle: 5,
-    passIQ: 5,
-    offensiveRebound: 5,
-    defensiveRebound: 5
+    closeShot: 50,
+    midRangeShot: 50,
+    threePointShot: 50,
+    freeThrow: 50,
+    shotIQ: 50,
+    layup: 50,
+    postHook: 50,
+    postFade: 50,
+    postControl: 50,
+    interiorDefense: 50,
+    perimeterDefense: 50,
+    steal: 50,
+    block: 50,
+    helpDefenseIQ: 50,
+    speed: 50,
+    strength: 50,
+    hustle: 50,
+    passAccuracy: 50,
+    ballHandle: 50,
+    passIQ: 50,
+    offensiveRebound: 50,
+    defensiveRebound: 50,
   });
 
   useEffect(() => {
@@ -48,22 +48,26 @@ const IndexPage: React.FC = () => {
   };
 
   const renderAttributeInputs = (stat: string, value: number) => {
-    return (
-      <div>
-        <h2>{stat}</h2>
-        <div>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            value={value}
-            onChange={(e) => handleCustomPlayerChange(stat as keyof PlayerAttributes, parseInt(e.target.value))}
-          />
-          <span>{value}</span>
-        </div>
+  return (
+    <div className="mb-4">
+      <h2 className="text-sm font-medium mb-1">{stat}</h2>
+      <div className="flex items-center space-x-2">
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onChange={(e) =>
+            handleCustomPlayerChange(stat as keyof PlayerAttributes, parseInt(e.target.value))
+          }
+          className="flex-grow"
+        />
+        <span className="w-12 text-center">{value}</span>
       </div>
-    );
-  };
+    </div>
+  );
+};
+
   
 
   return (
@@ -81,51 +85,51 @@ const IndexPage: React.FC = () => {
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Outside Scoring</h3>
-            {renderAttributeInputs('closeShot', customPlayer.closeShot || 5)}
-            {renderAttributeInputs('midRangeShot', customPlayer.midRangeShot || 5)}
-            {renderAttributeInputs('threePointShot', customPlayer.threePointShot || 5)}
-            {renderAttributeInputs('freeThrow', customPlayer.freeThrow || 5)}
-            {renderAttributeInputs('shotIQ', customPlayer.shotIQ || 5)}
+            {renderAttributeInputs('closeShot', customPlayer.closeShot || 50)}
+            {renderAttributeInputs('midRangeShot', customPlayer.midRangeShot || 50)}
+            {renderAttributeInputs('threePointShot', customPlayer.threePointShot || 50)}
+            {renderAttributeInputs('freeThrow', customPlayer.freeThrow || 50)}
+            {renderAttributeInputs('shotIQ', customPlayer.shotIQ || 50)}
           </div>
         </div>
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Inside Scoring</h3>
-            {renderAttributeInputs('layup', customPlayer.layup || 5)}
-            {renderAttributeInputs('postHook', customPlayer.postHook || 5)}
-            {renderAttributeInputs('postFade', customPlayer.postFade || 5)}
-            {renderAttributeInputs('postControl', customPlayer.postControl || 5)}
+            {renderAttributeInputs('layup', customPlayer.layup || 50)}
+            {renderAttributeInputs('postHook', customPlayer.postHook || 50)}
+            {renderAttributeInputs('postFade', customPlayer.postFade || 50)}
+            {renderAttributeInputs('postControl', customPlayer.postControl || 50)}
           </div>
         </div>
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Playmaking</h3>
-            {renderAttributeInputs('passAccuracy', customPlayer.passAccuracy || 5)}
-            {renderAttributeInputs('ballHandle', customPlayer.ballHandle || 5)}
-            {renderAttributeInputs('passIQ', customPlayer.passIQ || 5)}
+            {renderAttributeInputs('passAccuracy', customPlayer.passAccuracy || 50)}
+            {renderAttributeInputs('ballHandle', customPlayer.ballHandle || 50)}
+            {renderAttributeInputs('passIQ', customPlayer.passIQ || 50)}
           </div>
         </div>
         <div className="flex flex-col items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Athleticism</h3>
-            {renderAttributeInputs('speed', customPlayer.speed || 5)}
-            {renderAttributeInputs('strength', customPlayer.strength || 5)}
-            {renderAttributeInputs('hustle', customPlayer.hustle || 5)}
+            {renderAttributeInputs('speed', customPlayer.speed || 50)}
+            {renderAttributeInputs('strength', customPlayer.strength || 50)}
+            {renderAttributeInputs('hustle', customPlayer.hustle || 50)}
           </div>
         </div>
         <div className="flex flex-row items-start">
           <div className="mr-5">
             <h3 className="text-lg underline">Rebounding</h3>
-            {renderAttributeInputs('offensiveRebound', customPlayer.offensiveRebound || 5)}
-            {renderAttributeInputs('defensiveRebound', customPlayer.defensiveRebound || 5)}
+            {renderAttributeInputs('offensiveRebound', customPlayer.offensiveRebound || 50)}
+            {renderAttributeInputs('defensiveRebound', customPlayer.defensiveRebound || 50)}
           </div>
           <div className="mr-5">
             <h3 className="text-lg underline">Defense</h3>
-            {renderAttributeInputs('interiorDefense', customPlayer.interiorDefense || 5)}
-            {renderAttributeInputs('perimeterDefense', customPlayer.perimeterDefense || 5)}
-            {renderAttributeInputs('steal', customPlayer.steal || 5)}
-            {renderAttributeInputs('block', customPlayer.block || 5)}
-            {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ || 5)}
+            {renderAttributeInputs('interiorDefense', customPlayer.interiorDefense || 50)}
+            {renderAttributeInputs('perimeterDefense', customPlayer.perimeterDefense || 50)}
+            {renderAttributeInputs('steal', customPlayer.steal || 50)}
+            {renderAttributeInputs('block', customPlayer.block || 50)}
+            {renderAttributeInputs('helpDefenseIQ', customPlayer.helpDefenseIQ || 50)}
           </div>
         </div>
       </div>
@@ -133,7 +137,7 @@ const IndexPage: React.FC = () => {
         <div className="mr-2.5 w-96">
           <h3 className="text-lg underline">Custom Player Chart</h3>
           <ApexChart
-            series={[{ name: 'Your Chart', data: [6, 5, 5, 5, 5, 5, 6] }]}
+            series={[{ name: 'Your Chart', data: [6, 50, 50, 50, 50, 50, 6] }]}
             categories={['Overall', 'Inside Scoring', 'Outside Scoring', 'Athleticism', 'Playmaking', 'Rebounding', 'Defense']}
           />
         </div>
@@ -148,7 +152,7 @@ const IndexPage: React.FC = () => {
         <div className="mr-2.5 w-96">
           <h3 className="text-lg underline">Most Similar Player Chart</h3>
           <ApexChart
-            series={[{ name: 'Player Chart', data: [5, 9, 5, 5, 5, 7, 8] }]}
+            series={[{ name: 'Player Chart', data: [50, 9, 50, 50, 50, 7, 8] }]}
             categories={['Overall', 'Inside Scoring', 'Outside Scoring', 'Athleticism', 'Playmaking', 'Rebounding', 'Defense']}
           />
         </div>
