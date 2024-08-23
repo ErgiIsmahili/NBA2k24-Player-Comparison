@@ -5,8 +5,32 @@ import useDebounce from './useDebounce';
 import { PlayerAttributes, findMostSimilarPlayer, calculateAverageStats } from './yourPlayer';
 import league from './league.json';
 import ApexChart from './apexchart';
+import { initializeApp } from "firebase/app";
+import { getAnalytics, isSupported as isAnalyticsSupported } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCJFAybhRpTgE2vH8bj0gGXb_BnefTjrLQ",
+  authDomain: "nbaplayercomparison.firebaseapp.com",
+  projectId: "nbaplayercomparison",
+  storageBucket: "nbaplayercomparison.appspot.com",
+  messagingSenderId: "218226279696",
+  appId: "1:218226279696:web:6887e00eea3b9b59099195",
+  measurementId: "G-JRDRHG7M46"
+};
 
 const IndexPage: React.FC = () => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const app = initializeApp(firebaseConfig);
+      
+      isAnalyticsSupported().then((supported) => {
+        if (supported) {
+          getAnalytics(app);
+        }
+      });
+    }
+  }, []);
+  
   const [mostSimilarPlayer, setMostSimilarPlayer] = useState<{ player: PlayerAttributes | null, distance: number | null }>({ player: null, distance: null });
   const [customPlayer, setCustomPlayer] = useState<PlayerAttributes>({
     closeShot: 50,

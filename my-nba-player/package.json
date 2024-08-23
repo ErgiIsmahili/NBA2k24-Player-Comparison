@@ -6,14 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "move-files": "powershell -Command \"Copy-Item -Path 'out\\*' -Destination 'public\\' -Recurse -Force\"",
+    "deploy": "npm run build && npm run move-files && firebase deploy"
   },
   "dependencies": {
     "apexcharts": "^3.52.0",
-    "next": "14.2.3",
-    "react": "^18",
+    "firebase": "^10.13.0",
+    "next": "^14.2.3",
+    "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
-    "react-dom": "^18"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20",
